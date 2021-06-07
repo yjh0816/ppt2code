@@ -45,8 +45,9 @@ import cv2
 import numpy as np
 
 #img = cv2.imread('./naver.png')
+img = cv2.imread('./naver_login.png')
 #img = cv2.imread('./6-1 로그인.png')
-img = cv2.imread('./7-1 기본 설정.png')
+# img = cv2.imread('./7-1 기본 설정.png')
 #img = cv2.imread('./9-1 상품연결.png')
 #img = cv2.imread('./10-1 컨텐츠 관리 (프리미엄).png')
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -54,11 +55,12 @@ edges = cv2.Canny(gray,50,150,apertureSize = 3)
 minLineLength = 50
 maxLineGap = 10
 
-lines = cv2.HoughLinesP(edges,1,np.pi/180,100,minLineLength,maxLineGap)
+lines = cv2.HoughLinesP(edges,1,np.pi/2,11,minLineLength,maxLineGap)
 
 for line in lines:
     x1,y1,x2,y2 = line[0]
     cv2.line(img,(x1,y1),(x2,y2),(0,255,0),1)
+    print(x1,y1,x2,y2)
 
 cv2.imshow('edges', edges)
 cv2.imshow('result', img)

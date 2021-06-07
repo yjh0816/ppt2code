@@ -1,8 +1,10 @@
 class Node:
-    def __init__(self, item , x_position, y_position):
+    def __init__(self, item , x_position, y_position, x_position2, y_position2):
         self.item = item
         self.x = x_position
         self.y = y_position
+        self.x2 = x_position2
+        self.y2 = y_position2
         self.left = None
         self.right = None
         
@@ -49,7 +51,7 @@ class BinaryTree():
         return max(self.height(root.left), self.height(root.right)) +1
     
 tree = BinaryTree()
-node1 = Node("10", 0, 0)
+node1 = Node("10", 0, 0 , 55, 20)
 node2 = Node("20", 0, 0)
 node3 = Node("30", 0 , 30)
 node4 = Node("40", 50, 0)
@@ -67,4 +69,8 @@ node6.left = node7
 
 result_code = tree.postorder(tree.root_finder())
 result_code = "<html>" + result_code + "</html>"
+
+f = open("./sample.html", 'w')
+f.write(result_code)
+f.close()
 print(result_code)
