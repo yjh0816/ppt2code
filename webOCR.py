@@ -7,11 +7,14 @@
 from google.cloud import vision
 import io
 import cv2
+import json
 #구글 ocr기본
+
 def ocr():
     
     client = vision.ImageAnnotatorClient()
-    path = './naver2.png'
+    path = './6-1 로그인.png'
+    # path = './naver_login_sobel.png'
 
     with io.open(path, 'rb') as image_file:
         content = image_file.read()
@@ -24,6 +27,13 @@ def ocr():
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
+    count = len(texts)
+    #print(str(count))
+    for i in range(0,count):
+        #print(i)
+        print(texts[i]['EntityAnnotation'])
+        #print(type(texts[i]))
+    #print(type(texts))
 
     f = open("new.txt", 'w')
     print('Texts:')
