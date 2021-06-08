@@ -70,7 +70,7 @@ class BinaryTree():
                 if node.isp:
                     self.result_temp = self.result + self.result_temp
                     self.result = ""
-                    self.result = "<p style = \" width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + +node.isp + "</p>"
+                    self.result = "<p style = \" width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + node.isp + "</p>"
                 else:   
                     self.result_temp = self.result + self.result_temp
                     self.result = ""
@@ -88,13 +88,14 @@ x_size = 907
 y_size = 968   
     
 tree = BinaryTree()
-node1 = Node(0, 0, x_size, y_size)
-node2 = Node(100, 100, 800, 250)
-node3 = Node(600, 150, 700, 200)
-node4 = Node(100, 400, 800, 550)
-node5 = Node(600, 450, 700, 500)
-node6 = Node(100, 700, 800, 850)
-node7 = Node(600, 750, 700, 800)
+node1 = Node(0, 0, x_size, y_size, 0)
+node2 = Node(100, 100, 800, 250, 0)
+node3 = Node(600, 150, 700, 200, 0)
+node4 = Node(100, 400, 800, 550, 0)
+node5 = Node(600, 450, 700, 500, 0)
+node6 = Node(100, 700, 800, 850, 0)
+node7 = Node(600, 750, 700, 800, 0)
+node8 = Node(100, 100, 800, 250, "asdf")
 
 tree.insert(node1)
 tree.insert(node2)
@@ -103,6 +104,7 @@ tree.insert(node4)
 tree.insert(node5)
 tree.insert(node6)
 tree.insert(node7)
+tree.insert(node8)
 
 
 result_code = tree.postorder(tree.root_finder())
