@@ -16,8 +16,9 @@ import numpy
 from PIL import Image, ImageOps, ImageDraw
 from scipy.ndimage import morphology, label
 class Node:
-    def __init__(self, item , x_position1, y_position1, x_position2, y_position2):
-        self.item = item
+    def __init__(self, x_position1, y_position1, x_position2, y_position2):
+        self.xdis = x_position2 - x_position1
+        self.ydis = y_position2 - y_position1
         self.x1 = x_position1
         self.y1 = y_position1
         self.x2 = x_position2
@@ -77,11 +78,13 @@ class BinaryTree():
                 self.result_temp = self.result + self.result_temp
                 
             if not self.right_end:
-                self.result = "<div>" + node.item + self.result + "</div>"
+                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">"  + self.result + "</div>"
+        #f.write("<p style=\"font-size: 10px; width:"+str(text_corner_x2[i-1]-text_corner_x1[i-1])+"px; height:"+str(text_corner_y2[i-1]-text_corner_y1[i-1])+"px; position: absolute; top: "+str(text_corner_y1[i-1])+"px; left: "+str(text_corner_x1[i-1])+"px;"+"\"> "+str(texts[i])+"</p>")
+
             else:
                 self.result_temp = self.result + self.result_temp
                 self.result = ""
-                self.result = "<div>" + node.item +"</div>"
+                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">" + "</div>"
                     
         return self.result_temp             
                 
@@ -89,6 +92,7 @@ class BinaryTree():
         if root == None:
             return 0
         return max(self.height(root.left), self.height(root.right)) +1
+
 
 texts = []
 text_corner_x1 = []
@@ -100,6 +104,7 @@ box_corner_x1 = []
 box_corner_y1 = []
 box_corner_x2 = []
 box_corner_y2 = []
+tree = BinaryTree()
 # =============================================================================
 #             
 #             목업 이미지에 구글 OCR 사용 텍스트 검출
@@ -247,7 +252,8 @@ def boxes(orig):
             continue
 
         xmin, xmax, ymin, ymax = px.min(), px.max(), py.min(), py.max()
-        node = Node(str(i), xmin, ymin, xmax, ymax)
+        print(xmin, xmax, ymin, ymax)
+        node = Node(xmin, ymin, xmax, ymax)
         tree.insert(node)
         # Four corners and centroid.
         box.append([
@@ -288,7 +294,6 @@ def textTag():
         # print(i,texts[i],text_corner_x2[i-1], text_corner_y2[i-1])
     f.close()
 def createHtml():
-    tree = BinaryTree()
     
     # node1 = Node("10", 0, 0, x_size, y_size)
     # node2 = Node("20", 100, 100, 800, 250)
@@ -305,6 +310,7 @@ def createHtml():
     # tree.insert(node5)
     # tree.insert(node6)
     # tree.insert(node7)
+
     f = open("tree.html", 'w')
     result_code = tree.postorder(tree.root_finder())
     result_code = "<html>" + result_code + "</html>"
