@@ -62,7 +62,6 @@ class BinaryTree():
         return sub_root
     
     #후위 순회
-    #후위 순회
     def postorder(self, node):
         if node != None:
             #오른쪽 서브트리 순회
@@ -81,14 +80,14 @@ class BinaryTree():
                 
             if not self.right_end:
                 if node.isp:
-                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</p>"
+                    self.result = "<p style = \" width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">" +node.isp + self.result + "</p>"
                 else:
                     self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</div>"
             else:
                 if node.isp:
                     self.result_temp = self.result + self.result_temp
                     self.result = ""
-                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</p>"
+                    self.result = "<p style = \" width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + node.isp + "</p>"
                 else:   
                     self.result_temp = self.result + self.result_temp
                     self.result = ""
@@ -299,7 +298,7 @@ def textTag():
     f = open("새파일.html", 'w')
     for i in range(1,len(texts)):
         f.write("<p style=\"font-size: 10px; width:"+str(text_corner_x2[i-1]-text_corner_x1[i-1])+"px; height:"+str(text_corner_y2[i-1]-text_corner_y1[i-1])+"px; position: absolute; top: "+str(text_corner_y1[i-1])+"px; left: "+str(text_corner_x1[i-1])+"px;"+"\"> "+str(texts[i])+"</p>")
-        node = Node(text_corner_x1[i-1], text_corner_y1[i-1], text_corner_x2[i-1], text_corner_y2[i-1], texts[i])
+        node = Node(text_corner_x1[i-1], text_corner_y1[i-1], text_corner_x2[i-1], text_corner_y2[i-1], str(texts[i]))
         tree.insert(node)
         # print(i,texts[i],text_corner_x1[i-1], text_corner_y1[i-1])
         # print(i,texts[i],text_corner_x2[i-1], text_corner_y2[i-1])
@@ -330,7 +329,7 @@ def createHtml():
     print(result_code)
 # ocr()
 # img2bin()
-bin2box()
+# bin2box()
 textTag()
 createHtml()
 
