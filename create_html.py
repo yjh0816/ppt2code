@@ -1,6 +1,7 @@
 class Node:
-    def __init__(self, item , x_position1, y_position1, x_position2, y_position2):
-        self.item = item
+    def __init__(self, x_position1, y_position1, x_position2, y_position2):
+        self.xdis = x_position2 - x_position1
+        self.ydis = y_position2 - y_position1
         self.x1 = x_position1
         self.y1 = y_position1
         self.x2 = x_position2
@@ -60,11 +61,11 @@ class BinaryTree():
                 self.result_temp = self.result + self.result_temp
                 
             if not self.right_end:
-                self.result = "<div>" + node.item + self.result + "</div>"
+                self.result = "<div style = \" width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</div>"
             else:
                 self.result_temp = self.result + self.result_temp
                 self.result = ""
-                self.result = "<div>" + node.item +"</div>"
+                self.result = "<div style = \" width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</div>"
                     
         return self.result_temp             
                 
@@ -78,13 +79,13 @@ x_size = 907
 y_size = 968   
     
 tree = BinaryTree()
-node1 = Node("10", 0, 0, x_size, y_size)
-node2 = Node("20", 100, 100, 800, 250)
-node3 = Node("30", 600, 150, 700, 200)
-node4 = Node("40", 100, 400, 800, 550)
-node5 = Node("50", 600, 450, 700, 500)
-node6 = Node("60", 100, 700, 800, 850)
-node7 = Node("70", 600, 750, 700, 800)
+node1 = Node(0, 0, x_size, y_size)
+node2 = Node(100, 100, 800, 250)
+node3 = Node(600, 150, 700, 200)
+node4 = Node(100, 400, 800, 550)
+node5 = Node(600, 450, 700, 500)
+node6 = Node(100, 700, 800, 850)
+node7 = Node(600, 750, 700, 800)
 
 tree.insert(node1)
 tree.insert(node2)
