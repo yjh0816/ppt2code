@@ -1,11 +1,12 @@
 class Node:
-    def __init__(self, x_position1, y_position1, x_position2, y_position2):
+    def __init__(self, x_position1, y_position1, x_position2, y_position2, p_tag):
         self.xdis = x_position2 - x_position1
         self.ydis = y_position2 - y_position1
         self.x1 = x_position1
         self.y1 = y_position1
         self.x2 = x_position2
         self.y2 = y_position2
+        self.isp = p_tag
         self.left = None
         self.right = None
               
@@ -61,11 +62,19 @@ class BinaryTree():
                 self.result_temp = self.result + self.result_temp
                 
             if not self.right_end:
-                self.result = "<div style = \" width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</div>"
+                if self.isp:
+                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</p>"
+                else:
+                    self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</div>"
             else:
-                self.result_temp = self.result + self.result_temp
-                self.result = ""
-                self.result = "<div style = \" width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</div>"
+                if self.isp:
+                    self.result_temp = self.result + self.result_temp
+                    self.result = ""
+                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</p>"
+                else:   
+                    self.result_temp = self.result + self.result_temp
+                    self.result = ""
+                    self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</div>"
                     
         return self.result_temp             
                 
@@ -94,6 +103,7 @@ tree.insert(node4)
 tree.insert(node5)
 tree.insert(node6)
 tree.insert(node7)
+
 
 result_code = tree.postorder(tree.root_finder())
 result_code = "<html>" + result_code + "</html>"
