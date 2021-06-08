@@ -16,16 +16,17 @@ import numpy
 from PIL import Image, ImageOps, ImageDraw
 from scipy.ndimage import morphology, label
 class Node:
-    def __init__(self, x_position1, y_position1, x_position2, y_position2):
+    def __init__(self, x_position1, y_position1, x_position2, y_position2, p_tag):
         self.xdis = x_position2 - x_position1
         self.ydis = y_position2 - y_position1
         self.x1 = x_position1
         self.y1 = y_position1
         self.x2 = x_position2
         self.y2 = y_position2
+        self.isp = p_tag
         self.left = None
         self.right = None
-              
+
 class BinaryTree():
     #트리 생성
     def __init__(self):
@@ -61,6 +62,7 @@ class BinaryTree():
         return sub_root
     
     #후위 순회
+    #후위 순회
     def postorder(self, node):
         if node != None:
             #오른쪽 서브트리 순회
@@ -78,15 +80,22 @@ class BinaryTree():
                 self.result_temp = self.result + self.result_temp
                 
             if not self.right_end:
-                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">"  + self.result + "</div>"
-        #f.write("<p style=\"font-size: 10px; width:"+str(text_corner_x2[i-1]-text_corner_x1[i-1])+"px; height:"+str(text_corner_y2[i-1]-text_corner_y1[i-1])+"px; position: absolute; top: "+str(text_corner_y1[i-1])+"px; left: "+str(text_corner_x1[i-1])+"px;"+"\"> "+str(texts[i])+"</p>")
-
+                if node.isp:
+                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</p>"
+                else:
+                    self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</div>"
             else:
-                self.result_temp = self.result + self.result_temp
-                self.result = ""
-                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">" + "</div>"
+                if node.isp:
+                    self.result_temp = self.result + self.result_temp
+                    self.result = ""
+                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</p>"
+                else:   
+                    self.result_temp = self.result + self.result_temp
+                    self.result = ""
+                    self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</div>"
                     
         return self.result_temp             
+                         
                 
     def height(self, root):
         if root == None:
@@ -253,7 +262,7 @@ def boxes(orig):
 
         xmin, xmax, ymin, ymax = px.min(), px.max(), py.min(), py.max()
         print(xmin, xmax, ymin, ymax)
-        node = Node(xmin, ymin, xmax, ymax)
+        node = Node(xmin, ymin, xmax, ymax, 0)
         tree.insert(node)
         # Four corners and centroid.
         box.append([
@@ -290,6 +299,8 @@ def textTag():
     f = open("새파일.html", 'w')
     for i in range(1,len(texts)):
         f.write("<p style=\"font-size: 10px; width:"+str(text_corner_x2[i-1]-text_corner_x1[i-1])+"px; height:"+str(text_corner_y2[i-1]-text_corner_y1[i-1])+"px; position: absolute; top: "+str(text_corner_y1[i-1])+"px; left: "+str(text_corner_x1[i-1])+"px;"+"\"> "+str(texts[i])+"</p>")
+        node = Node(text_corner_x1[i-1], text_corner_y1[i-1], text_corner_x2[i-1], text_corner_y2[i-1], texts[i])
+        tree.insert(node)
         # print(i,texts[i],text_corner_x1[i-1], text_corner_y1[i-1])
         # print(i,texts[i],text_corner_x2[i-1], text_corner_y2[i-1])
     f.close()
@@ -320,7 +331,7 @@ def createHtml():
 # ocr()
 # img2bin()
 bin2box()
-# textTag()
+textTag()
 createHtml()
 
 
