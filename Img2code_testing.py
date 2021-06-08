@@ -15,6 +15,80 @@ import sys
 import numpy
 from PIL import Image, ImageOps, ImageDraw
 from scipy.ndimage import morphology, label
+class Node:
+    def __init__(self, item , x_position1, y_position1, x_position2, y_position2):
+        self.item = item
+        self.x1 = x_position1
+        self.y1 = y_position1
+        self.x2 = x_position2
+        self.y2 = y_position2
+        self.left = None
+        self.right = None
+              
+class BinaryTree():
+    #트리 생성
+    def __init__(self):
+        self.root = None
+        self.result = ""
+        self.result_temp = ""
+        self.right_end = 0
+        
+    def root_finder(self):
+        return self.root
+        
+    def insert(self, node):
+        self.root = self._insert_value(self.root, node)
+        return self.root is not None
+           
+    def _insert_value(self, sub_root, node):
+        if sub_root is None:
+            sub_root = node
+        else:
+            if sub_root.x1 < node.x1 and sub_root.x2  > node.x2 and sub_root.y1 < node.y1 and sub_root.y2 > node.y2:
+                sub_root.left = self._insert_value(sub_root.left, node)            
+            elif sub_root.x1 > node.x1 and sub_root.x2  < node.x2 and sub_root.y1 > node.y1 and sub_root.y2 < node.y2:
+                node.left = self._insert_value(sub_root.left, sub_root)
+                #node.right = self._insert_value(sub_root.right, sub_root)
+                sub_root = node
+            elif sub_root.x1 > node.x1 or sub_root.y1 > node.y1 :
+                #node.left = self._insert_value(sub_root.left, sub_root)
+                node.right = self._insert_value(sub_root.right, sub_root)
+                sub_root = node
+            else:
+                sub_root.right = self._insert_value(sub_root.right, node)
+            
+        return sub_root
+    
+    #후위 순회
+    def postorder(self, node):
+        if node != None:
+            #오른쪽 서브트리 순회
+            if node.right:
+                self.postorder(node.right)
+                self.right_end = 1
+                
+            #왼쪽 서브트리 순회
+            if node.left:
+                self.postorder(node.left)
+                self.right_end = 0
+            
+            #노드 방문
+            if node == self.root_finder():
+                self.result_temp = self.result + self.result_temp
+                
+            if not self.right_end:
+                self.result = "<div>" + node.item + self.result + "</div>"
+            else:
+                self.result_temp = self.result + self.result_temp
+                self.result = ""
+                self.result = "<div>" + node.item +"</div>"
+                    
+        return self.result_temp             
+                
+    def height(self, root):
+        if root == None:
+            return 0
+        return max(self.height(root.left), self.height(root.right)) +1
 
 texts = []
 text_corner_x1 = []
@@ -22,6 +96,10 @@ text_corner_y1 = []
 text_corner_x2 = []
 text_corner_y2 = []
 
+box_corner_x1 = []
+box_corner_y1 = []
+box_corner_x2 = []
+box_corner_y2 = []
 # =============================================================================
 #             
 #             목업 이미지에 구글 OCR 사용 텍스트 검출
@@ -169,11 +247,14 @@ def boxes(orig):
             continue
 
         xmin, xmax, ymin, ymax = px.min(), px.max(), py.min(), py.max()
+        node = Node(str(i), xmin, ymin, xmax, ymax)
+        tree.insert(node)
         # Four corners and centroid.
         box.append([
             [(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)],
             (numpy.mean(px), numpy.mean(py))])
-
+    # for i in range(0,len(box)):
+    #     print(box[i])
     return im.astype(numpy.uint8) * 255, box
 
 
@@ -206,10 +287,35 @@ def textTag():
         # print(i,texts[i],text_corner_x1[i-1], text_corner_y1[i-1])
         # print(i,texts[i],text_corner_x2[i-1], text_corner_y2[i-1])
     f.close()
+def createHtml():
+    tree = BinaryTree()
+    
+    # node1 = Node("10", 0, 0, x_size, y_size)
+    # node2 = Node("20", 100, 100, 800, 250)
+    # node3 = Node("30", 600, 150, 700, 200)
+    # node4 = Node("40", 100, 400, 800, 550)
+    # node5 = Node("50", 600, 450, 700, 500)
+    # node6 = Node("60", 100, 700, 800, 850)
+    # node7 = Node("70", 600, 750, 700, 800)
+
+    # tree.insert(node1)
+    # tree.insert(node2)
+    # tree.insert(node3)
+    # tree.insert(node4)
+    # tree.insert(node5)
+    # tree.insert(node6)
+    # tree.insert(node7)
+    f = open("tree.html", 'w')
+    result_code = tree.postorder(tree.root_finder())
+    result_code = "<html>" + result_code + "</html>"
+    f.write(result_code)
+    f.close()
+    print(result_code)
 # ocr()
-img2bin()
-# bin2box()
-textTag()
+# img2bin()
+bin2box()
+# textTag()
+createHtml()
 
 
 
