@@ -26,7 +26,7 @@ class Node:
         self.isp = p_tag
         self.left = None
         self.right = None
-
+              
 class BinaryTree():
     #트리 생성
     def __init__(self):
@@ -94,13 +94,11 @@ class BinaryTree():
                     self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</div>"
                     
         return self.result_temp             
-                         
                 
     def height(self, root):
         if root == None:
             return 0
         return max(self.height(root.left), self.height(root.right)) +1
-
 
 texts = []
 text_corner_x1 = []
@@ -298,8 +296,8 @@ def textTag():
     f = open("새파일.html", 'w')
     for i in range(1,len(texts)):
         f.write("<p style=\"font-size: 10px; width:"+str(text_corner_x2[i-1]-text_corner_x1[i-1])+"px; height:"+str(text_corner_y2[i-1]-text_corner_y1[i-1])+"px; position: absolute; top: "+str(text_corner_y1[i-1])+"px; left: "+str(text_corner_x1[i-1])+"px;"+"\"> "+str(texts[i])+"</p>")
-        node = Node(text_corner_x1[i-1], text_corner_y1[i-1], text_corner_x2[i-1], text_corner_y2[i-1], str(texts[i]))
-        tree.insert(node)
+        # node = Node(text_corner_x1[i-1], text_corner_y1[i-1], text_corner_x2[i-1], text_corner_y2[i-1], str(texts[i]))
+        # tree.insert(node)
         # print(i,texts[i],text_corner_x1[i-1], text_corner_y1[i-1])
         # print(i,texts[i],text_corner_x2[i-1], text_corner_y2[i-1])
     f.close()
@@ -328,8 +326,8 @@ def createHtml():
     f.close()
     print(result_code)
 # ocr()
-# img2bin()
-# bin2box()
+img2bin()
+bin2box()
 textTag()
 createHtml()
 
