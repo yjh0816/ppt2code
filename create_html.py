@@ -62,15 +62,15 @@ class BinaryTree():
                 self.result_temp = self.result + self.result_temp
                 
             if not self.right_end:
-                if self.isp:
-                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</p>"
+                if node.isp:
+                    self.result = "<p style = \" width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">" +node.isp + self.result + "</p>"
                 else:
                     self.result = "<div style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px;\">"  + self.result + "</div>"
             else:
-                if self.isp:
+                if node.isp:
                     self.result_temp = self.result + self.result_temp
                     self.result = ""
-                    self.result = "<p style = \" border : 1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + "</p>"
+                    self.result = "<p style = \" width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px;\">" + +node.isp + "</p>"
                 else:   
                     self.result_temp = self.result + self.result_temp
                     self.result = ""
