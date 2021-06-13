@@ -113,8 +113,8 @@ tree = BinaryTree()
 def ocr():
     
     client = vision.ImageAnnotatorClient()
-    path = './naver_login.png'
-    # path = './6-1 로그인.png'
+    # path = './naver_login.png'
+    path = './6-1 로그인.png'
     # path = './9-1 상품연결.png'
     # path = './naver.png'
     # path = './google_lee.png'
@@ -150,8 +150,8 @@ def ocr():
 #             
 # =============================================================================
 def img2bin():
-    img = ('naver_login.png')
-    # img = ('6-1 로그인.png')
+    # img = ('naver_login.png')
+    img = ('6-1 로그인.png')
     # img = ('9-1 상품연결.png')
     # img = ('naver.png')
     # img = ('google_lee.png')
@@ -319,7 +319,7 @@ def createHtml():
     f.close()
     print(result_code)
     
-# ocr()
+ocr()
 img2bin()
 bin2box()
 textTag()

@@ -43,6 +43,7 @@
 
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 #img = cv2.imread('./naver.png')
 img = cv2.imread('./naver_login.png')
@@ -64,6 +65,8 @@ for line in lines:
 
 cv2.imshow('edges', edges)
 cv2.imshow('result', img)
+plt.imsave('opcv.png', edges)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
