@@ -16,7 +16,7 @@ import numpy
 from PIL import Image, ImageOps, ImageDraw
 from scipy.ndimage import morphology, label
 class Node:
-    def __init__(self, x_position1, y_position1, x_position2, y_position2):
+    def __init__(self, x_position1, y_position1, x_position2, y_position2, name):
         self.xdis = x_position2 - x_position1
         self.ydis = y_position2 - y_position1
         self.x1 = x_position1
@@ -25,6 +25,8 @@ class Node:
         self.y2 = y_position2
         self.left = None
         self.right = None
+        self.parent = None
+        self.data = name
               
 class BinaryTree():
     #트리 생성
@@ -44,20 +46,28 @@ class BinaryTree():
     def _insert_value(self, sub_root, node):
         if sub_root is None:
             sub_root = node
+            
         else:
             if sub_root.x1 < node.x1 and sub_root.x2  > node.x2 and sub_root.y1 < node.y1 and sub_root.y2 > node.y2:
-                sub_root.left = self._insert_value(sub_root.left, node)            
-            elif sub_root.x1 > node.x1 and sub_root.x2  < node.x2 and sub_root.y1 > node.y1 and sub_root.y2 < node.y2:
-                node.left = self._insert_value(sub_root.left, sub_root)
-                #node.right = self._insert_value(sub_root.right, sub_root)
-                sub_root = node
-            elif sub_root.x1 > node.x1 or sub_root.y1 > node.y1 :
-                #node.left = self._insert_value(sub_root.left, sub_root)
-                node.right = self._insert_value(sub_root.right, sub_root)
-                sub_root = node
-            else:
-                sub_root.right = self._insert_value(sub_root.right, node)
+                # 지금 들어온 box가 subroot의 내부에 위치하는 경우로 왼쪽의 child로 들어간다
+                node.parent = sub_root
+                sub_root.left = self._insert_value(sub_root.left, node) 
+                
+            elif (sub_root.x1 > node.x1 and sub_root.x2  < node.x2 and sub_root.y1 > node.y1 and sub_root.y2 < node.y2) or (sub_root.y1 > node.y2):
+                sub_root.parent = node
+                node = self._insert_value(node, sub_root)
+               
+                if sub_root.right is not None:
+                    node = self._insert_value(node, sub_root.right)
+                    sub_root.right = None
+                    if sub_root.left is not None:
+                        node = self._insert_value(node, sub_root.left)
+                return node
             
+            else:
+                node.parent = sub_root
+                sub_root.right = self._insert_value(sub_root.right, node)
+
         return sub_root
     
     #후위 순회
@@ -78,13 +88,13 @@ class BinaryTree():
                 self.result_temp = self.result + self.result_temp
                 
             if not self.right_end:
-                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis)+"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">"  + self.result + "</div>"
+                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" + str(node.ydis) +"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">"  + self.result + "</div>"
             else:
                 self.result_temp = self.result + self.result_temp
                 self.result = ""
-                self.result = "<div style = \" border:1px solid black; width: " + str(node.xdis) +"px; height:" +str(node.ydis)+"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">" + "</div>"
-                
-        return self.result_temp             
+                self.result = "<div style = \" border:1px solid black; width: " + str(node.axdis) +"px; height:" + str(node.ydis) +"px; position: absolute; top: "+str(node.y1)+"px; left: "+str(node.x1)+"px;"+"\">" + "</div>"
+         
+        return self.result_temp
                 
     def height(self, root):
         if root == None:
