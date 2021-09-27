@@ -146,6 +146,7 @@ D_filter = 0
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from firebase_admin import storage
 from datetime import datetime
 import os
 # Use a service account
@@ -310,6 +311,7 @@ def boxes(orig):
 
         xmin, xmax, ymin, ymax = px.min(), px.max(), py.min(), py.max()
         print(xmin, xmax, ymin, ymax)
+        imageCrop(cnt, xmin, xmax, ymin, ymax)
         doc_ref = db.collection(u'trainingCollection').document("trainingImage").collection("125464").document(str(cnt))
         data = {
             "position": [int(xmin), int(xmax), int(ymin), int(ymax)]
@@ -387,7 +389,17 @@ def createHtml():
     f.close()
     print(result_code)
     
+def imageCrop(cnt, xmin, xmax, ymin, ymax):
+    area = (xmin, ymin, xmax-xmin, ymax-ymin)
+    im = Image.open('/tmp/temp.png')
 
+    cropped_image = im.crop(area)
 
-
-
+    bucket = storage.bucket()
+    blob = bucket.blob(cropped_image)
+    blob.upload_from_filename(cropped_image)
+    # doc_ref = db.collection(u'trainingCollection').document("trainingImage").collection("125464").document(str(cnt))
+    # data = {
+    #     "position": [int(xmin), int(xmax), int(ymin), int(ymax)]
+    # }
+    # doc_ref.set(data, merge=True)
