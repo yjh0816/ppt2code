@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>코로키네이터</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/page1.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/reset.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="hidden-xs hidden-sm container-fluid" id="large-header">
+            <div class="hidden-xs hidden-sm col-md-10 col-lg-10">
+                <div id="logo">Img2Code</div>
+            </div>
+        </div>
+
+        <div class="hidden-md hidden-lg container-fluid" id="small-header">
+            <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+                <div id="small-logo">Img2Code</div>
+            </div>
+        </div>
+        
+    </header>
+
+    <content>
+        <!-- 서비스 설명 -->
+        <section id="service-info">
+            <div class="section-container">
+                <div id="info-container">
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-3 col-lg-2 col-lg-offset-3">
+                        <div class="hello-gif-box">
+                            <img src="../public/images/hello.gif" id="hello-gif" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+                        <div class="hello-info">
+                            <p>안녕하세요!</p>
+                            <p> <span>Img2Code</span>입니다.</p>
+                            <p>변환하고 싶은 이미지를 선택해주세요</p>
+                            <div id="call-box">
+                                <input type = "file" id = "upload_img">
+                                <button id="call-bot-btn">
+                                    <p> 이미지 업로드하기 </p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </content>
+    <footer>
+    </footer>
+    <script type="text/javascript" src="../public/js/bootstrap.js"></script>
+    <script type="module" src="../public/js/page1.js"></script>
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyB5M-Svyk4D9E_TI8-AyUwgODkWb9s9gX8",
+      authDomain: "img2code-326013.firebaseapp.com",
+      databaseURL: "https://img2code-326013-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "img2code-326013",
+      storageBucket: "img2code-326013.appspot.com",
+      messagingSenderId: "585361370835",
+      appId: "1:585361370835:web:d24e84715cef9eef706e26",
+      measurementId: "G-HFRH590GDL"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    const db = firebase.firestore();
+    db.collection("trainingCollection").get().then((querySnapshot) => {
+        console.log(querySnapshot);
+        
+        querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        });
+    });
+    //  db.collection('trainingCollection').get().then((item)=>{
+    //     console.log(item);
+
+    //      item.forEach((docs)=>{
+    //         console.log(docs.data());
+    //         alert(docs.data());
+    //      })
+    //  })
+
+    // const ref = db.collection('trainingCollection');
+    // const getDoc = ref.get()
+    // .then(doc => {
+    //     doc.forEach( item=>{  //item이 저장한 데이터 객체 원본입니다.
+    //         console.log(item.data());
+    //         //console.log(item.id);  //고유 키 값 입니다.
+    //     });
+    // })
+    // .catch(err => {
+    //     console.log('Error getting document', err);
+    // });
+  </script>
+</html>

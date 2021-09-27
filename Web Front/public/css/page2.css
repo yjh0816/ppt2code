@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    /* 400 700 900 */
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 100%;
+}
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f1f1f1;
+    color: #404040;
+    font-size: 16px;
+    line-height: 1.8;
+    height: 100%;
+}
+
+ul li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #404040;
+}
+
+a:hover{
+    text-decoration : none;
+    color: #75A5DE;
+    font-weight: bold;
+}
+
+section {
+    overflow: hidden;
+}
+
+/* header*/
+header {
+    position: fixed;
+    z-index: 500;
+    height: 8%;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    opacity: 0.8;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #eee;
+}
+
+header #large-header{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 2px 6px #C4C4C4;
+}
+
+header #logo{
+    font-family: 'Audiowide', cursive;
+    font-size:  3.2vmin;
+}
+
+header #small-header{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    box-shadow: 0px 2px 6px #C4C4C4;
+}
+
+header #small-logo {
+    font-family: 'Audiowide', cursive;
+    font-size: 3.2vmin;
+    margin-left: 20px;
+}
+
+/* content */
+.section-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.section-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#service-info {
+    height: 92%;
+    width: 100%;
+}
+
+#service-info #info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+
+#service-info .thinking-gif-box {
+    display: flex;
+    justify-content: center;
+    padding-left: 80px;
+}
+
+#service-info .thinking-info { 
+    /* padding-left: 50px; */
+    min-width: 577px;
+    margin-top: 300px
+    ;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#service-info .thinking-info p {
+    margin-bottom: 30px;
+}
+
+#service-info .thinking-info span {
+    font-size: 35px;
+    color: #75A5DE;
+}
+
+#service-info .thinking-info #call-box {
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+    font-size: 16px;
+}
+
+#service-info .thinking-info #call-box p {
+    margin-bottom: 0;
+}
+
+#service-info .thinking-info #call-box #call-bot-btn {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+}
+
+/* 큰 화면 */
+@media only screen and (min-width:1500px) {
+    #service-use #use-container #thinking-gif{
+        width: 360px;
+        right: 350px;
+    }
+    #service-use #use-container #use-top{
+        font-size: 35px;
+    }
+}
+@media only screen and (min-width:1380px) {
+    #local #local-container #local-gif{
+        width: 200px;
+        right: 250px;
+    }
+}
+@media only screen and (min-width:1400px){
+    #article #absolute-container #news-gif{
+        width: 300px;
+        left: 300px;
+    }
+    #article #news-box p{
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+}
