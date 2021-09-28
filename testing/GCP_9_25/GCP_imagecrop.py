@@ -46,6 +46,8 @@ import numpy
 from PIL import Image, ImageOps, ImageDraw
 from scipy.ndimage import morphology, label
 import urllib.request
+
+storage_client = storage.Client()
 class Node:
     def __init__(self, x_position1, y_position1, x_position2, y_position2):
         self.xdis = x_position2 - x_position1
@@ -146,7 +148,7 @@ D_filter = 0
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
-from firebase_admin import storage
+# from firebase_admin import storage
 from datetime import datetime
 import os
 # Use a service account
@@ -395,6 +397,13 @@ def imageCrop(cnt, xmin, xmax, ymin, ymax):
 
     cropped_image = im.crop(area)
 
+    # How to image save?
+    Image.fromarray(cropped_image).save('/tmp/'+cnt+'.png')
+
+    #############
+    #first solve#
+    #############
+
     bucket = storage.bucket()
     blob = bucket.blob(cropped_image)
     blob.upload_from_filename(cropped_image)
@@ -403,3 +412,17 @@ def imageCrop(cnt, xmin, xmax, ymin, ymax):
     #     "position": [int(xmin), int(xmax), int(ymin), int(ymax)]
     # }
     # doc_ref.set(data, merge=True)
+
+    ##############
+    #second solve#
+    ##############
+
+    # Enable Storage
+    client = storage.Client()
+
+    # Reference an existing bucket.
+    bucket = client.get_bucket('img2code-326013.appspot.com')
+
+    # Upload a local file to a new file to be created in your bucket.
+    zebraBlob = bucket.get_blob('/tmp/'+cnt+'.png')
+    zebraBlob.upload_from_filename(filename='/tmp/'+cnt+'.png')
