@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>코로키네이터</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./css/page1.css">
+    <link rel="stylesheet" type="text/css" href="./css/reset.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-performance-compat.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="hidden-xs hidden-sm container-fluid" id="large-header">
+            <div class="hidden-xs hidden-sm col-md-10 col-lg-10">
+                <div id="logo">Img2Code</div>
+            </div>
+        </div>
+
+        <div class="hidden-md hidden-lg container-fluid" id="small-header">
+            <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+                <div id="small-logo">Img2Code</div>
+            </div>
+        </div>
+        
+    </header>
+
+    <content>
+        <!-- 서비스 설명 -->
+        <section id="service-info">
+            <div class="section-container">
+                <div id="info-container">
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-3 col-lg-2 col-lg-offset-3">
+                        <div class="hello-gif-box">
+                            <img src="./images/hello.gif" id="hello-gif" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+                        <div class="hello-info">
+                            <p>안녕하세요!</p>
+                            <p> <span>Img2Code</span>입니다.</p>
+                            <p>변환하고 싶은 이미지를 선택해주세요</p>
+                            <div id="call-box">
+                                <input type = "file" id = "upload_img">
+                                <button id="call-bot-btn">
+                                    <p> 이미지 업로드하기 </p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </content>
+    <footer>
+    </footer>
+    <script type="text/javascript" src="./js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/page1.js"></script>
+</body>
+</html>

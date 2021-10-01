@@ -5,15 +5,24 @@
     <meta charset="UTF-8" />
     <title>코로키네이터</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/page3.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/page1.css">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/9.1.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/9.1.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/9.1.0/firebase-performance-compat.js"></script>
 </head>
 
 <body>
@@ -39,7 +48,7 @@
                 <div id="info-container">
                     <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-3 col-lg-2 col-lg-offset-3">
                         <div class="hello-gif-box">
-                            <img src="../public/images/hello.gif" id="hello-gif" />
+                            <img src="../images/hello.gif" id="hello-gif" />
                         </div>
                     </div>
 
@@ -49,8 +58,10 @@
                             <p> <span>Img2Code</span>입니다.</p>
                             <p>변환하고 싶은 이미지를 선택해주세요</p>
                             <div id="call-box">
-                                <p> 이미지 선택하기 </p>
-                                <img src="../public/images/arrow.svg" alt="select-button" id="call-bot-btn" />
+                                <input type = "file" id = "upload_img">
+                                <button id="call-bot-btn">
+                                    <p> 이미지 업로드하기 </p>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -60,7 +71,7 @@
     </content>
     <footer>
     </footer>
-    <script type="text/javascript" src="../public/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../public/js/page3.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/page1.js"></script>
 </body>
 </html>

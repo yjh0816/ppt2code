@@ -1,0 +1,1 @@
+var firebase = requir('firebase');
