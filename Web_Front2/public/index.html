@@ -6,10 +6,10 @@
     <title>Img2Code</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="./css/page3.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
     <link rel="shortcut icon" href="#">
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
@@ -40,16 +40,32 @@
         </div>
         
     </header>
-    
+
     <content>
         <!-- 서비스 설명 -->
         <section id="service-info">
             <div class="section-container">
                 <div id="info-container">
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                        <div class="target-box">
-                            <img src="https://firebasestorage.googleapis.com/v0/b/img2code-326013.appspot.com/o/Web_images%2F20211010215928.png?alt=media" id="target" />
-                            <!-- <img src="./images/hello.gif" id="target" /> -->
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-3 col-lg-2 col-lg-offset-3">
+                        <div class="hello-gif-box">
+                            <img src="./images/hello.gif" id="hello-gif" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+                        <div class="hello-info">
+                            <p>안녕하세요!</p>
+                            <p> <span>Img2Code</span>입니다.</p>
+                            <p>변환하고 싶은 이미지를 선택해주세요</p>
+                            <div id="call-box">
+                                <input type = "file" id = "upload_img" accept="image/*" />
+                                <button id="call-bot-btn">
+                                    <p> 이미지 <br/>업로드하기 </p>
+                                </button>
+                                <button id="next-page" onclick="location.href = 'page3.html'">
+                                    <p> 다음 <br/>페이지로 </p>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,6 +75,6 @@
     <footer>
     </footer>
     <script type="text/javascript" src="./js/bootstrap.js"></script>
-    <script type="module" src="./js/page3.js"></script>
+    <script type="module" src="./js/index.js"></script>
 </body>
 </html>

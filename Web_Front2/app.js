@@ -13,7 +13,7 @@ app.listen(8080, function() {
 // localhost:8080 브라우저에 res.sendFile() 내부의 파일이 띄워진다.
 
 app.get('/', function(req,res) {
-  res.sendFile(__dirname + "/public/views/page1.html")
+  res.sendFile(__dirname + "/public/views/index.html")
 })
 
 // // localhost:8080/main 브라우저에 res.sendFile() 내부의 파일이 띄워진다.
@@ -26,3 +26,6 @@ app.get('/', function(req,res) {
 app.use(express.static('public'))
 
 //웹 서버 open 완료
+
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";

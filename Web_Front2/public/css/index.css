@@ -40,8 +40,9 @@ section {
 
 /* header*/
 header {
+    position: fixed;
     z-index: 500;
-    height: 8vh;
+    height: 8%;
     top: 0;
     left: 0;
     right: 0;
@@ -51,7 +52,6 @@ header {
     display: flex;
     justify-content: flex-end;
     border-bottom: 1px solid #eee;
-    display: block;
 }
 
 header #large-header{
@@ -84,10 +84,6 @@ header #small-logo {
 }
 
 /* content */
-content {
-    width: 100%;
-    height: 92%;
-}
 .section-container {
     height: 100%;
     width: 100%;
@@ -102,25 +98,21 @@ content {
 }
 
 #service-info {
-    height: 100%;
+    height: 92%;
     width: 100%;
 }
 
 #service-info #info-container {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 50px;
 }
 
-#service-info .target-box {
+#service-info .hello-gif-box {
     display: flex;
     justify-content: center;
-}
-
-#service-info .target-box #target{
-    object-fit: cover;
+    padding-left: 80px;
 }
 
 #service-info .hello-info { 
@@ -153,8 +145,14 @@ content {
 }
 
 #service-info .hello-info #call-box #call-bot-btn {
-    width: 15px;
-    height: 15px;
+    width: 100px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+#service-info .hello-info #call-box #next-apge{
+    width: 100px;
+    height: 50px;
     margin-left: 10px;
 }
 
