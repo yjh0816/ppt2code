@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }, () => {
             console.log('성공');
             alert("등록되었습니다");
+            document.getElementById("name").value = timestamp;
         }
     );
 

@@ -49,13 +49,43 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage()
-
+var target_num = 0;
 
 $(document).ready(function(){
-  // 20211009210629.png를 timestamp와 fileExt 로 변경해야 함
-  // index.js에서 가져와야합니다
-  // var pathRef = storage.ref('Web_images/20211009210629.png');
-  // var gsRef = storage.refFromURL('gs://img2code-326013.appspot.com/Web_images/' + '20211009210629.png');
-  // var httpsRef = storage.refFromURL('https://https://firebasestorage.googleapis.com/v0/b/img2code-326013.appspot.com/o/Web_images%2F20211009210629?');
+  //20211010215928 대신 timestamp 값 가져와야 합니다
+  db.collection('trainingCollection').doc("trainingImage").collection('20211012024137').get().then((snapshot) => {
+    snapshot.forEach((target_doc) => {
+      var target_top = target_doc.data().position[2];
+      var target_left = target_doc.data().position[0];
+      var target_width = target_doc.data().position[1] - target_doc.data().position[0];
+      var target_height = target_doc.data().position[3] - target_doc.data().position[2];
+      var target_url = target_doc.data().image_url;
 
+      var target_html = '<button class = "target" id = "target' + target_num + '" style = "top : ' + target_top + 'px; left : ' + target_left + 'px; width : ' + target_width  + 'px; height : ' + target_height + 'px; background-image : url('
+      + target_url + ');">'+target_num + '</button>';
+      target_num++;
+      $('.target-box').append(target_html);
+    })
+  });
+});
+
+$(document).on('click','.target',function(){
+  // var target_button = $('.target');
+  // target_button.css("border", "solid 3px black");
+  var click_id = $(this).attr('id');
+  console.log(click_id);
+  $(".popup_box").show();
+  $("#mask").fadeIn(100); 
+  
+  // 팝업 중앙 정렬
+    var $layerPopup = $(".popup_box");
+    var left = ($(window).scrollLeft() + ($(window).width() - $layerPopup.width()) / 2);
+    var top = ($(window).scrollTop() + ($(window).height() - $layerPopup.height()) / 2 );
+    $layerPopup.css({ "left": left, "top":top, "position": "absolute" });
+    $("body").css("position", "relative").append($layerPopup);
+});
+
+$(".btn_close").click(function() {
+  $(".popup_box").hide();
+  $("#mask").fadeOut(100);
 });
