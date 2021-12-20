@@ -1,9 +1,6 @@
 var burger = $('#menu-trigger');
 var submit_button = $('#call-bot-btn');
 var upload_img = $('#upload_img');
-var confrim_button = $('#confirm_button')
-var create_html = $("#create_html")
-var stamp = ""
 
 burger.each(function (index) {
   var $this = $(this);
@@ -84,21 +81,20 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(error);
           }, () => {
             console.log('성공');
-            console.log(timestamp);
             alert("등록되었습니다");
-            stamp = timestamp;
+            document.getElementById("name").value = timestamp;
         }
     );
+
+    db.collection('trainingCollection').doc('trainingImage').collection(timestamp).doc('0').set({
+      img :"gs://img2code-326013.appspot.com/Web_images/" +  timestamp + '.' + selectedFile_Ext
+    });
   });
   // save_return_timestamp(timestamp);
 });
-
-create_html.click(function(){
-  console.log(stamp);
-  document.location.href = 'page2.html?name=' + stamp;
-})
 
 function save_return_timestamp(timestamp){
   var _timestamp = timestamp
   return _timestamp
 }
+

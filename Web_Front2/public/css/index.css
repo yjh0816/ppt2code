@@ -144,20 +144,16 @@ header #small-logo {
     margin-bottom: 0;
 }
 
-#service-info .hello-info #call-box #upload_img{
-    margin-top: 10px;
-}
-
 #service-info .hello-info #call-box #call-bot-btn {
     width: 100px;
     height: 50px;
     margin-right: 10px;
 }
 
-#service-info .hello-info #call-box #create_html {
+#service-info .hello-info #call-box #next-apge{
     width: 100px;
     height: 50px;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 /* 큰 화면 */

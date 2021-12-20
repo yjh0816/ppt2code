@@ -34,10 +34,14 @@ a:hover{
     font-weight: bold;
 }
 
+section {
+    overflow: hidden;
+}
+
 /* header*/
 header {
     z-index: 500;
-    height: 8%;
+    height: 8vh;
     top: 0;
     left: 0;
     right: 0;
@@ -84,10 +88,6 @@ content {
     width: 100%;
     height: 92%;
 }
-section{
-    width: 100%;
-    height: 100%;
-}
 .section-container {
     height: 100%;
     width: 100%;
@@ -104,7 +104,6 @@ section{
 #service-info {
     height: 100%;
     width: 100%;
-    margin-bottom: 10px;
 }
 
 #service-info #info-container {
@@ -113,7 +112,6 @@ section{
     display: flex;
     flex-direction: row;
     margin-top: 50px;
-    overflow: auto;
 }
 
 #service-info .target-box {
@@ -161,7 +159,6 @@ section{
     margin-left: 10px;
 }
 
-
 .popup {
     display: none;
     position:fixed;
@@ -175,13 +172,10 @@ section{
   /* -------------------section 시작 --------------------------*/
 #mask { width: 100%; height: 100%; position: fixed; top: 0; left: 0; background: #000; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; filter: alpha(opacity=50);zoom: 1; opacity: 0.5; z-index: 9998; display: none; }
 .btn_open { padding: 5px 10px; background: #759587; border: 0; color: #fff; cursor: pointer; }
-.popup_box { display: none; width: 350px; height: 300px; background: #fff; border: 1px solid #333; }
-.popup_title { width: 100%; padding: 5px 0; background: #333; color: #fff; text-align: left; position:absolute; top: 0; }
-.popup_cont { margin-top: 30px; padding: 20px; height: 200px;}
-.popup_close { width: 100%; padding: 5px 0; background: #333; color: #fff; text-align: right; position:absolute; bottom: 0;}
-.btn_submit { margin: 5px; background: none; border: 0; color: #fff; cursor: pointer; float: left;}
-.btn_close { margin: 5px; background: none; border: 0; color: #fff; cursor: pointer;}
-#popup_tag {height: 75%;}
+.popup_box { display: none; width: 280px; height: 300px; background: #fff; border: 1px solid #333; }
+.popup_cont { padding: 20px; }
+.popup_close { width: 100%; padding: 5px 0; background: #333; color: #fff; text-align: right; position:absolute; bottom: 0; }
+.btn_close { margin: 5px; background: none; border: 0; color: #fff; cursor: pointer; }
 
 /* 큰 화면 */
 @media only screen and (min-width:1500px) {

@@ -49,17 +49,11 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage()
-var target_id = getParameterByName('name');
-var click_id = 0;
-function getParameterByName(name) { 
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]"); 
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search); 
-  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " ")); 
-}
+var target_num = 0;
 
 $(document).ready(function(){
-  //20211020043157를 target_id 로 변경
-  db.collection('trainingCollection').doc("trainingImage").collection(target_id).get().then((snapshot) => {
+  //20211010215928 대신 timestamp 값 가져와야 합니다
+  db.collection('trainingCollection').doc("trainingImage").collection('20211012024137').get().then((snapshot) => {
     snapshot.forEach((target_doc) => {
       var target_top = target_doc.data().position[2];
       var target_left = target_doc.data().position[0];
@@ -67,39 +61,31 @@ $(document).ready(function(){
       var target_height = target_doc.data().position[3] - target_doc.data().position[2];
       var target_url = target_doc.data().image_url;
 
-      var target_html = '<button class = "target" id = "' + target_doc.id + '" style = "top : ' + target_top + 'px; left : ' + target_left + 'px; width : ' + target_width  + 'px; height : ' + target_height + 'px; background-image : url('
-      + target_url + ');">'+  target_doc.id + '</button>';
+      var target_html = '<button class = "target" id = "target' + target_num + '" style = "top : ' + target_top + 'px; left : ' + target_left + 'px; width : ' + target_width  + 'px; height : ' + target_height + 'px; background-image : url('
+      + target_url + ');">'+target_num + '</button>';
+      target_num++;
       $('.target-box').append(target_html);
     })
   });
-  var origin_img_html = '<img src = "https://firebasestorage.googleapis.com/v0/b/img2code-326013.appspot.com/o/Web_images%2F' + target_id + '.png?alt=media"/>';
-  $("#origin_img").append(origin_img_html);
 });
 
 $(document).on('click','.target',function(){
-  click_id = $(this).attr('id');
+  // var target_button = $('.target');
+  // target_button.css("border", "solid 3px black");
+  var click_id = $(this).attr('id');
+  console.log(click_id);
   $(".popup_box").show();
+  $("#mask").fadeIn(100); 
   
   // 팝업 중앙 정렬
-  var $layerPopup = $(".popup_box");
-  var left = ($(window).width() - $layerPopup.width()) - 200  ;
-  var top = ($(window).scrollTop() + ($(window).height() - $layerPopup.height()) / 2 );
-  $layerPopup.css({ "left": left, "top":top, "position": "absolute" });
-  $("body").css("position", "relative").append($layerPopup);
-
-  //태그 샐랙트
-  $('.p_title').text(click_id);
-  $(this).css("border", "3px solid red");
+    var $layerPopup = $(".popup_box");
+    var left = ($(window).scrollLeft() + ($(window).width() - $layerPopup.width()) / 2);
+    var top = ($(window).scrollTop() + ($(window).height() - $layerPopup.height()) / 2 );
+    $layerPopup.css({ "left": left, "top":top, "position": "absolute" });
+    $("body").css("position", "relative").append($layerPopup);
 });
 
-$(document).on('click','.btn_close',function(){
-  $("#" + click_id).css("border", "1px solid black");
+$(".btn_close").click(function() {
   $(".popup_box").hide();
-});
-
-$(document).on('click','.btn_submit',function(){
-  var target_tag = $('#popup_tag').val();
-  db.collection('trainingCollection').doc("trainingImage").collection(target_id).doc(click_id).update({ tag : target_tag });
-  $(".popup_box").hide();
-  $("#" + click_id).css("display", "none");
+  $("#mask").fadeOut(100);
 });

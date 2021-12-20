@@ -62,8 +62,14 @@
                                 <button id="call-bot-btn">
                                     <p> 이미지 <br/>업로드하기 </p>
                                 </button>
-                                <button id="create_html">
-                                    <p> HTML <br/> 생성 </p>
+
+                                <form action="https://asia-northeast3-img2code-326013.cloudfunctions.net/function-18" method="GET">
+                                    <input type=text name=name id="name">
+                                    <input type=submit value=확인>
+                                </form>
+                                
+                                <button id="next-page" onclick="location.href = 'page3.html'">
+                                    <p> 다음 <br/>페이지로 </p>
                                 </button>
                             </div>
                         </div>
