@@ -3,20 +3,26 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>코로키네이터</title>
+    <title>Img2Code</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="./css/page2.css">
     <link rel="stylesheet" type="text/css" href="./css/reset.css">
+    <link rel="shortcut icon" href="#">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
 </head>
 
 <body>
+    <!-- <form id= "submit_form" action="https://asia-northeast3-img2code-326013.cloudfunctions.net/function-18" method="GET">
+        <input type=text name=name id="name" style="display : none">
+        <input type=submit value=확인 style="display : none">
+    </form> -->
+
+    
+
     <header>
         <div class="hidden-xs hidden-sm container-fluid" id="large-header">
             <div class="hidden-xs hidden-sm col-md-10 col-lg-10">
@@ -48,6 +54,15 @@
                             <p>잠시만 기다려주세요!</p>
                             <p> <span>객체</span> 검색중입니다.</p>
                         </div>
+                        <form action="https://asia-northeast3-img2code-326013.cloudfunctions.net/function-17" method="GET">
+                            <input type=text name=name id="name">
+                            <input type=submit value= 데이터수집>
+                        </form>
+                        <form action="https://asia-northeast3-img2code-326013.cloudfunctions.net/clone-18" method="GET">
+                        <!-- <form action="https://us-central1-img2code-326013.cloudfunctions.net/clone-19" method="GET"> -->
+                            <input type=text name=name id="name2">
+                            <input type=submit value= 최종서비스>
+                        </form>
                     </div>
                 </div>
             </div>

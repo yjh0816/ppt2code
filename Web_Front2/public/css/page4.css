@@ -34,15 +34,10 @@ a:hover{
     font-weight: bold;
 }
 
-section {
-    overflow: hidden;
-}
-
 /* header*/
 header {
-    position: fixed;
     z-index: 500;
-    height: 8%;
+    height: 75px;
     top: 0;
     left: 0;
     right: 0;
@@ -52,6 +47,7 @@ header {
     display: flex;
     justify-content: flex-end;
     border-bottom: 1px solid #eee;
+    display: block;
 }
 
 header #large-header{
@@ -84,6 +80,14 @@ header #small-logo {
 }
 
 /* content */
+content {
+    width: 100%;
+    height: auto;
+}
+section{
+    width: 100%;
+    height: 100%;
+}
 .section-container {
     height: 100%;
     width: 100%;
@@ -98,21 +102,28 @@ header #small-logo {
 }
 
 #service-info {
-    height: 92%;
+    height: 100%;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 #service-info #info-container {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 50px;
+    overflow: auto;
 }
 
-#service-info .hello-gif-box {
+#service-info .target-box {
     display: flex;
     justify-content: center;
-    padding-left: 80px;
+    position: relative;
+}
+
+#service-info .target-box .target{
+    position: absolute;
 }
 
 #service-info .hello-info { 
@@ -144,21 +155,23 @@ header #small-logo {
     margin-bottom: 0;
 }
 
-#service-info .hello-info #call-box #upload_img{
-    margin-top: 10px;
-}
-
 #service-info .hello-info #call-box #call-bot-btn {
-    width: 100px;
-    height: 50px;
-    margin-right: 10px;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
 }
 
-#service-info .hello-info #call-box #create_html {
-    width: 100px;
-    height: 50px;
-    margin-right: 10px;
-}
+
+.popup {
+    display: none;
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.5);
+  }
+  
 
 /* 큰 화면 */
 @media only screen and (min-width:1500px) {
